@@ -30,7 +30,7 @@ fn get_triplets(numbers: &[u32], sum: u32) -> Option<(u32, u32, u32)> {
 
 fn main() -> std::io::Result<()> {
     let mut path = env::current_dir()?;
-    path.push("coins");
+    path.push("puzzle");
     let file = File::open(&path)?;
     let reader = BufReader::new(file);
 

@@ -4,7 +4,7 @@ use std::fs::File;
 use std::io::{self, BufRead, BufReader};
 use std::path::Path;
 
-fn get_pairs(numbers: &[u32], sum: u32) -> Option<(u32, u32)> {
+fn get_pairs(numbers: &[u16], sum: u16) -> Option<(u16, u16)> {
     for each in numbers {
         if sum > *each {
             let another = sum - each;
@@ -16,7 +16,7 @@ fn get_pairs(numbers: &[u32], sum: u32) -> Option<(u32, u32)> {
     None
 }
 
-fn get_triplets(numbers: &[u32], sum: u32) -> Option<(u32, u32, u32)> {
+fn get_triplets(numbers: &[u16], sum: u16) -> Option<(u16, u16, u16)> {
     for each in numbers {
         if sum > *each {
             let remainder = sum - each;
@@ -37,7 +37,7 @@ fn main() -> std::io::Result<()> {
     let mut numbers = Vec::new();
     for line in reader.lines() {
         if let Ok(num) = line {
-            if let Ok(num) = num.parse::<u32>() {
+            if let Ok(num) = num.parse::<u16>() {
                 numbers.push(num);
             }
         }
@@ -45,10 +45,10 @@ fn main() -> std::io::Result<()> {
     numbers.sort_unstable();
     let sum = 2020;
     if let Some(p) = get_pairs(&numbers[..], sum) {
-        println!("Product of two is {}", (p.0 * p.1));
+        println!("Product of two is {}", (p.0 as u32 * p.1 as u32));
     }
     if let Some(p) = get_triplets(&numbers[..], sum) {
-        println!("Product of three is {}", (p.0 * p.1 * p.2));
+        println!("Product of three is {}", (p.0 as u32 * p.1 as u32 * p.2 as u32));
     }
     Ok(())
 }

@@ -31,17 +31,15 @@ pub fn get_triplets(numbers: &[u16], sum: u16) -> Option<(u16, u16, u16)> {
 }
 
 pub fn get_triplets_fast(numbers: &[u16], sum: u16) -> Option<(u16, u16, u16)> {
-    // use hash set to solve in O(n^2) 
+    // use hash set to solve in O(n^2)
     unimplemented!();
 }
 
 pub fn read_input(filename: &str) -> Result<Vec<u16>> {
     let mut numbers = Vec::new();
     for line in read_lines(filename)? {
-        if let Ok(num) = line {
-            if let Ok(num) = num.parse::<u16>() {
-                numbers.push(num);
-            }
+        if let Ok(num) = line?.parse::<u16>() {
+            numbers.push(num);
         }
     }
     Ok(numbers)

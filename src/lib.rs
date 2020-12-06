@@ -1,7 +1,7 @@
 use anyhow::Result;
+use std::env;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Lines};
-use std::env;
 
 pub fn read_lines(filename: &str) -> Result<Lines<BufReader<File>>> {
     let mut path = env::current_dir()?;
@@ -11,5 +11,25 @@ pub fn read_lines(filename: &str) -> Result<Lines<BufReader<File>>> {
     Ok(reader.lines())
 }
 
-pub mod day1;
-pub mod day2;
+#[macro_export]
+macro_rules! use_mod {
+    ($($mod:ident),+$(,)?) => {
+        $(
+            pub mod $mod;
+        )*
+    }
+}
+
+#[macro_export]
+macro_rules! print_line {
+    ($($line:expr),+$(,)?) => {
+        let mut string = String::new();
+        $(
+            string.push_str(&$line);
+            string.push('\n');
+        )*
+        println!("{}", &string);
+    }
+}
+
+use_mod!(day1, day2, day3, day4);

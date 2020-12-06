@@ -26,14 +26,11 @@ impl Line {
 pub fn part1(filename: &str) -> Result<usize> {
     let mut num_valid = 0;
     for each in read_lines(filename)? {
-        if let Ok(line) = each {
-            let line = Line::parse(&line)?;
-            let mut num_letter = 0;
-            let num_letter = line.password.matches(line.letter).count() as u8;
-            let (min, max) = line.numbers;
-            if num_letter >= min && num_letter <= max {
-                num_valid += 1;
-            }
+        let line = Line::parse(&each?)?;
+        let num_letter = line.password.matches(line.letter).count() as u8;
+        let (min, max) = line.numbers;
+        if num_letter >= min && num_letter <= max {
+            num_valid += 1;
         }
     }
 
@@ -43,14 +40,12 @@ pub fn part1(filename: &str) -> Result<usize> {
 pub fn part2(filename: &str) -> Result<usize> {
     let mut num_valid = 0;
     for each in read_lines(filename)? {
-        if let Ok(line) = each {
-            let line = Line::parse(&line)?;
-            let chars: Vec<char> = line.password.chars().collect();
-            let in_first = chars[(line.numbers.0 - 1) as usize] == line.letter;
-            let in_second = chars[(line.numbers.1 - 1) as usize] == line.letter;
-            if (in_first || in_second) && !(in_first && in_second) {
-                num_valid += 1;
-            }
+        let line = Line::parse(&each?)?;
+        let chars: Vec<char> = line.password.chars().collect();
+        let in_first = chars[(line.numbers.0 - 1) as usize] == line.letter;
+        let in_second = chars[(line.numbers.1 - 1) as usize] == line.letter;
+        if (in_first || in_second) && !(in_first && in_second) {
+            num_valid += 1;
         }
     }
 

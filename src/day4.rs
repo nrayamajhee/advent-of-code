@@ -17,22 +17,21 @@ fn verify(field: &str, value: &str) -> bool {
         "eyr" => between(value, 2020, 2030),
         "hgt" => {
             let last = value.len();
-            if &value[last - 2..last] == "cm" {
-                between(&value[..last - 2], 150, 193)
-            } else if &value[last - 2..last] == "in" {
-                between(&value[..last - 2], 59, 76)
+            let unit = &value[last - 2..];
+            let number = &value[..last - 2];
+            if unit == "cm" {
+                between(&number, 150, 193)
+            } else if unit == "in" {
+                between(&number, 59, 76)
             } else {
                 false
             }
         }
         "hcl" => {
-            let color = Regex::new(r"^#(?:[0-9a-fA-F]){6}$").unwrap();
+            let color = Regex::new(r"^#[0-9a-fA-F]{6}$").unwrap();
             color.is_match(value)
         }
-        "ecl" => match value {
-            "amb" | "blu" | "brn" | "gry" | "grn" | "hzl" | "oth" => true,
-            _ => false,
-        },
+        "ecl" => matches!(value, "amb" | "blu" | "brn" | "gry" | "grn" | "hzl" | "oth"),
         "pid" => {
             let passport = Regex::new(r"^\d{9}$").unwrap();
             passport.is_match(value)
@@ -76,18 +75,15 @@ pub fn part2(filename: &str) -> Result<usize> {
     let mut num_valid = 0;
     let mut info = HashMap::new();
     let mut check = |info: &mut HashMap<String, String>| {
-        let optional = if let Some(_) = info.get("cid") {
-            false
-        } else {
-            true
-        };
         let mut verified_fields = 0;
         for (key, value) in info.iter() {
-            if verify(key, value) {
-                verified_fields += 1;
+            if key != "cid" {
+                if verify(key, value) {
+                    verified_fields += 1;
+                }
             }
         }
-        if verified_fields == 8 || (verified_fields == 7 && optional) {
+        if verified_fields >= 7 {
             num_valid += 1;
         }
         info.clear();

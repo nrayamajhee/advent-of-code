@@ -32,4 +32,4 @@ macro_rules! print_line {
     }
 }
 
-use_mod!(day1, day2, day3, day4);
+use_mod!(day1, day2, day3, day4, day5);

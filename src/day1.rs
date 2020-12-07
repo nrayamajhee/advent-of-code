@@ -13,6 +13,7 @@ pub fn get_pairs(numbers: &[u16], sum: u16) -> Option<(u16, u16)> {
     None
 }
 
+#[allow(dead_code, unused_variables)]
 pub fn get_pairs_fast(numbers: &[u16], sum: u16) -> Option<(u16, u16)> {
     // use two indices to solve in O(n)
     unimplemented!();
@@ -30,6 +31,7 @@ pub fn get_triplets(numbers: &[u16], sum: u16) -> Option<(u16, u16, u16)> {
     None
 }
 
+#[allow(dead_code, unused_variables)]
 pub fn get_triplets_fast(numbers: &[u16], sum: u16) -> Option<(u16, u16, u16)> {
     // use hash set to solve in O(n^2)
     unimplemented!();

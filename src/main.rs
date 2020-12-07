@@ -9,7 +9,8 @@ fn main() -> Result<()> {
             "Day1: Report Repair",
             "Day2: Password Philosophy",
             "Day3: Toboggan Trajectory",
-            "Day4: Passport Processing"
+            "Day4: Passport Processing",
+            "Day5: Binary Boarding"
         );
         print!("Pick you day: ");
         io::stdout().flush()?;
@@ -56,6 +57,11 @@ fn main() -> Result<()> {
                     "The number of verified valid passports is: {}",
                     part2("input/day4")?
                 );
+            }
+            5 => {
+                use aoc::day5::*;
+                println!("The biggest boarding id is: {}", part1("input/day5")?);
+                println!("Your id is: {}", part2("input/day5")?);
             }
             _ => {
                 invalid = true;

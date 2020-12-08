@@ -49,7 +49,9 @@ pub fn read_input(filename: &str) -> Result<Vec<u16>> {
 
 const SUM: u16 = 2020;
 
-pub fn part1(numbers: &[u16]) -> Result<Option<u32>> {
+pub fn part1(filename: &str) -> Result<Option<u32>> {
+    let mut numbers = read_input(filename)?;
+    numbers.sort_unstable();
     let prod2 = if let Some((a, b)) = get_pairs(&numbers[..], SUM) {
         Some(a as u32 * b as u32)
     } else {
@@ -58,7 +60,9 @@ pub fn part1(numbers: &[u16]) -> Result<Option<u32>> {
     Ok(prod2)
 }
 
-pub fn part2(numbers: &[u16]) -> Result<Option<u32>> {
+pub fn part2(filename: &str) -> Result<Option<u32>> {
+    let mut numbers = read_input(filename)?;
+    numbers.sort_unstable();
     let prod3 = if let Some((a, b, c)) = get_triplets(&numbers[..], SUM) {
         Some(a as u32 * b as u32 * c as u32)
     } else {

@@ -10,7 +10,8 @@ fn main() -> Result<()> {
             "Day2: Password Philosophy",
             "Day3: Toboggan Trajectory",
             "Day4: Passport Processing",
-            "Day5: Binary Boarding"
+            "Day5: Binary Boarding",
+            "Day6: Custom Customs"
         );
         print!("Pick you day: ");
         io::stdout().flush()?;
@@ -24,11 +25,11 @@ fn main() -> Result<()> {
                 numbers.sort_unstable();
                 println!(
                     "The product of two numbers that sum up to 2020 is: {:?}",
-                    part1(&numbers[..])?
+                    part1("input/day1")?
                 );
                 println!(
                     "The product of three numbers that sum up to 2020 is: {:?}",
-                    part2(&numbers[..])?
+                    part2("input/day2")?
                 );
             }
             2 => {
@@ -62,6 +63,17 @@ fn main() -> Result<()> {
                 use aoc::day5::*;
                 println!("The biggest boarding id is: {}", part1("input/day5")?);
                 println!("Your id is: {}", part2("input/day5")?);
+            }
+            6 => {
+                use aoc::day6::*;
+                println!(
+                    "The total number of any yes answers is: {}",
+                    part1("input/day6")?
+                );
+                println!(
+                    "The total number of every yes answers is: {}",
+                    part2("input/day6")?
+                );
             }
             _ => {
                 invalid = true;

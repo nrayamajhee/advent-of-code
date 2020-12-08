@@ -55,16 +55,11 @@ pub fn part2(filename: &str) -> Result<usize> {
     }
     ids.sort_unstable();
     let mut your_id = None;
-    for row in 1..126 {
-        // Your id is not at the very front or back
-        for col in 0..8 {
-            let id = row * 8 + col;
-            if let Err(_) = ids.binary_search(&id) {
-                if let Ok(_) = ids.binary_search(&(id - 1)) {
-                    if let Ok(_) = ids.binary_search(&(id + 1)) {
-                        your_id = Some(id);
-                    }
-                }
+    for (i, each) in ids.iter().enumerate() {
+        if i < ids.len() - 2 {
+            let next = ids[i + 1];
+            if next != each + 1 && next == each + 2 {
+                your_id = Some(*each + 1);
             }
         }
     }

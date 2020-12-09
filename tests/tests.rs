@@ -5,6 +5,8 @@ test! {
     (day2, 2, 1),
     (day3, 7, 336),
     (day6, 11, 6),
+    (day7, 4, 32),
+    (day8, 5, 8),
 }
 
 test_file! {(day4, ("input/day4_test", 2), ("input/day4_part2_test", 4))}

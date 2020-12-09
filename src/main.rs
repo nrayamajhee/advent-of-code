@@ -11,7 +11,9 @@ fn main() -> Result<()> {
             "Day3: Toboggan Trajectory",
             "Day4: Passport Processing",
             "Day5: Binary Boarding",
-            "Day6: Custom Customs"
+            "Day6: Custom Customs",
+            "Day 7: Handy Haversacks",
+            "Day 8: Handheld Halting"
         );
         print!("Pick you day: ");
         io::stdout().flush()?;
@@ -73,6 +75,25 @@ fn main() -> Result<()> {
                 println!(
                     "The total number of every yes answers is: {}",
                     part2("input/day6")?
+                );
+            }
+            7 => {
+                use aoc::day7::*;
+                println!(
+                    "The total number of ways to store shiny golden bag is: {}",
+                    part1("input/day7")?
+                );
+                println!(
+                    "The total number of bags that shiny golden bag contains is: {}",
+                    part2("input/day7")?
+                );
+            }
+            8 => {
+                use aoc::day8::*;
+                println!("The value of the accumulator is: {}", part1("input/day8")?);
+                println!(
+                    "The value of the accumulator is after correcting the corrupted instruction is: {}",
+                    part2("input/day8")?
                 );
             }
             _ => {

@@ -57,9 +57,9 @@ pub fn part1(filename: &str) -> Result<usize> {
         if line == "" {
             check(&mut info);
         } else {
-            let pairs: Vec<&str> = line.split(" ").collect();
+            let pairs: Vec<_> = line.split(" ").collect();
             for each in pairs {
-                let pair: Vec<&str> = each.split(":").collect();
+                let pair: Vec<_> = each.split(":").collect();
                 info.insert(pair[0].to_owned());
             }
         }
@@ -75,14 +75,13 @@ pub fn part2(filename: &str) -> Result<usize> {
     let mut num_valid = 0;
     let mut info = HashMap::new();
     let mut check = |info: &mut HashMap<String, String>| {
-        let mut verified_fields = 0;
-        for (key, value) in info.iter() {
-            if key != "cid" {
-                if verify(key, value) {
-                    verified_fields += 1;
-                }
+        let verified_fields = info.iter().fold(0, |verified, (key, value)| {
+            if key != "cid" && verify(key, value) {
+                verified + 1
+            } else {
+                verified
             }
-        }
+        });
         if verified_fields >= 7 {
             num_valid += 1;
         }

@@ -2,18 +2,18 @@ use crate::read_lines;
 use anyhow::Result;
 
 pub fn traverse(filename: &str, right: usize, down: usize) -> Result<usize> {
-    let mut trees = 0;
-    let mut left = 0;
-    for (i, each) in read_lines(filename)?.enumerate() {
-        if i % down == 0 {
-            let line: Vec<char> = each?.chars().collect();
-            let index = left % line.len();
-            if line[index] == '#' {
-                trees += 1;
-            }
-            left += right;
-        }
-    }
+    let (_, trees) =
+        read_lines(filename)?
+            .step_by(down)
+            .fold((0, 0), |(mut left, mut trees), line| {
+                if let Ok(line) = line {
+                    if &line[left..left + 1] == "#" {
+                        trees += 1;
+                    }
+                    left = (left + right) % line.len();
+                }
+                (left, trees)
+            });
     Ok(trees)
 }
 

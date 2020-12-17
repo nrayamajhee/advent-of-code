@@ -1,7 +1,7 @@
 use crate::read_lines;
 use anyhow::Result;
 
-pub fn get_pairs(numbers: &[u16], sum: u16) -> Option<(u16, u16)> {
+pub fn get_pairs(numbers: &[usize], sum: usize) -> Option<(usize, usize)> {
     for each in numbers {
         if sum > *each {
             let another = sum - each;
@@ -13,17 +13,31 @@ pub fn get_pairs(numbers: &[u16], sum: u16) -> Option<(u16, u16)> {
     None
 }
 
-#[allow(dead_code, unused_variables)]
-pub fn get_pairs_fast(numbers: &[u16], sum: u16) -> Option<(u16, u16)> {
-    // use two indices to solve in O(n)
-    unimplemented!();
+pub fn get_pairs_fast(numbers: &[usize], sum: usize) -> Option<(usize, usize)> {
+    let mut left = 0;
+    let mut right = if numbers.len() == 0 { 0 } else { numbers.len() - 1};
+    let mut pairs = None;
+    while left < right {
+        let left_num = numbers[left];
+        let right_num = numbers[right];
+        let current_sum = left_num + right_num;
+        if current_sum == sum {
+            pairs = Some((left_num, right_num));
+            break;
+        } else if current_sum < sum {
+            left += 1;
+        } else {
+            right -= 1;
+        }
+    }
+    pairs
 }
 
-pub fn get_triplets(numbers: &[u16], sum: u16) -> Option<(u16, u16, u16)> {
+pub fn get_triplets(numbers: &[usize], sum: usize) -> Option<(usize, usize, usize)> {
     for each in numbers {
         if sum > *each {
             let remainder = sum - each;
-            if let Some((a, b)) = get_pairs(numbers, remainder) {
+            if let Some((a, b)) = get_pairs_fast(numbers, remainder) {
                 return Some((*each, a, b));
             }
         }
@@ -31,28 +45,22 @@ pub fn get_triplets(numbers: &[u16], sum: u16) -> Option<(u16, u16, u16)> {
     None
 }
 
-#[allow(dead_code, unused_variables)]
-pub fn get_triplets_fast(numbers: &[u16], sum: u16) -> Option<(u16, u16, u16)> {
-    // use hash set to solve in O(n^2)
-    unimplemented!();
-}
-
-pub fn read_input(filename: &str) -> Result<Vec<u16>> {
+pub fn read_input(filename: &str) -> Result<Vec<usize>> {
     let mut numbers = Vec::new();
     for line in read_lines(filename)? {
-        if let Ok(num) = line?.parse::<u16>() {
+        if let Ok(num) = line?.parse::<usize>() {
             numbers.push(num);
         }
     }
     Ok(numbers)
 }
 
-const SUM: u16 = 2020;
+const SUM: usize = 2020;
 
 pub fn part1(filename: &str) -> Result<Option<u32>> {
     let mut numbers = read_input(filename)?;
     numbers.sort_unstable();
-    let prod2 = if let Some((a, b)) = get_pairs(&numbers[..], SUM) {
+    let prod2 = if let Some((a, b)) = get_pairs_fast(&numbers[..], SUM) {
         Some(a as u32 * b as u32)
     } else {
         None

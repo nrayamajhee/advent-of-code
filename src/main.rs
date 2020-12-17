@@ -13,7 +13,8 @@ fn main() -> Result<()> {
             "Day5: Binary Boarding",
             "Day6: Custom Customs",
             "Day 7: Handy Haversacks",
-            "Day 8: Handheld Halting"
+            "Day 8: Handheld Halting",
+            "Day 9: Encoding Error"
         );
         print!("Pick you day: ");
         io::stdout().flush()?;
@@ -31,7 +32,7 @@ fn main() -> Result<()> {
                 );
                 println!(
                     "The product of three numbers that sum up to 2020 is: {:?}",
-                    part2("input/day2")?
+                    part2("input/day1")?
                 );
             }
             2 => {
@@ -95,6 +96,14 @@ fn main() -> Result<()> {
                     "The value of the accumulator is after correcting the corrupted instruction is: {}",
                     part2("input/day8")?
                 );
+            }
+            9 => {
+                use aoc::day9::*;
+                println!(
+                    "The first number that doesn't violates XMAS is: {}",
+                    part1("input/day9", 25)?
+                );
+                println!("The sum of first and last of the contigous numbers that sum to the exception is: {}", part2("input/day9", 25)?);
             }
             _ => {
                 invalid = true;

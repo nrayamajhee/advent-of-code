@@ -4,6 +4,8 @@ use regex::Regex;
 use std::cell::RefCell;
 use std::collections::{HashMap, VecDeque};
 
+const BAG: &'static str = "shiny gold";
+
 #[derive(Debug)]
 struct Line {
     bag: String,
@@ -46,7 +48,7 @@ pub fn part1(filename: &str) -> Result<usize> {
     }
     let sum = graph.iter().fold(0, |sum, (bag, node)| {
         let mut found = false;
-        if bfs(&graph, &bag, "shiny gold") {
+        if bfs(&graph, &bag, BAG) {
             found = true;
         }
         // this will prevent unecessary bf search for other bags that contain this 'bag'
@@ -90,6 +92,8 @@ fn dfs(graph: &HashMap<String, Node>, bag: &str) -> usize {
     let mut total_contents = 0;
     for (each, num) in &node.contents {
         let inner = dfs(graph, &each);
+        // inner + 1 because you should count this bag
+        // even if it doesn't contain more bag
         total_contents += num * (inner + 1);
     }
     total_contents
@@ -107,5 +111,5 @@ pub fn part2(filename: &str) -> Result<usize> {
             },
         );
     }
-    Ok(dfs(&graph, "shiny gold"))
+    Ok(dfs(&graph, BAG))
 }

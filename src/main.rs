@@ -14,7 +14,10 @@ fn main() -> Result<()> {
             "Day6: Custom Customs",
             "Day 7: Handy Haversacks",
             "Day 8: Handheld Halting",
-            "Day 9: Encoding Error"
+            "Day 9: Encoding Error",
+            "Day 9: Encoding Error",
+            "Day 10: Adapter Array",
+            "Day 11: Seating System"
         );
         print!("Pick you day: ");
         io::stdout().flush()?;
@@ -104,6 +107,24 @@ fn main() -> Result<()> {
                     part1("input/day9", 25)?
                 );
                 println!("The sum of first and last of the contigous numbers that sum to the exception is: {}", part2("input/day9", 25)?);
+            }
+            10 => {
+                use aoc::day10::*;
+                println!(
+                    "The number of 1-jolt differences multiplied by the number of 3-jolt differences is {}",
+                    part1("input/day10")?
+                );
+                println!(
+                    "The total number of distinct ways you can arrange the adapters to connect the charging outlet to your device is {}",
+                    part2("input/day10")?
+                );
+            }
+            11 => {
+                use aoc::day11::*;
+                println!(
+                    "{} seats end up occupied",
+                    part1("input/day11")?
+                );
             }
             _ => {
                 invalid = true;

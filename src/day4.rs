@@ -54,18 +54,18 @@ pub fn part1(filename: &str) -> Result<usize> {
     };
     for each in read_lines(filename)? {
         let line = each?;
-        if line == "" {
+        if line.is_empty() {
             check(&mut info);
         } else {
-            let pairs: Vec<_> = line.split(" ").collect();
+            let pairs: Vec<_> = line.split(' ').collect();
             for each in pairs {
-                let pair: Vec<_> = each.split(":").collect();
+                let pair: Vec<_> = each.split(':').collect();
                 info.insert(pair[0].to_owned());
             }
         }
     }
     // check again because the input might not have a new line at the end
-    if info.len() > 0 {
+    if !info.is_empty() {
         check(&mut info);
     }
     Ok(num_valid)
@@ -89,18 +89,18 @@ pub fn part2(filename: &str) -> Result<usize> {
     };
     for each in read_lines(filename)? {
         let line = each?;
-        if line == "" {
+        if line.is_empty() {
             check(&mut info);
         } else {
-            let pairs: Vec<&str> = line.split(" ").collect();
+            let pairs: Vec<&str> = line.split(' ').collect();
             for each in pairs {
-                let pair: Vec<&str> = each.split(":").collect();
+                let pair: Vec<&str> = each.split(':').collect();
                 info.insert(pair[0].to_owned(), pair[1].to_owned());
             }
         }
     }
     // check again because the input might not have a new line at the end
-    if info.len() > 0 {
+    if !info.is_empty() {
         check(&mut info);
     }
     Ok(num_valid)

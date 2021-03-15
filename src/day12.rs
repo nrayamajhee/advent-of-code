@@ -47,7 +47,7 @@ impl Direction {
         let dr = deg % 360 / 90;
         let mut new_dir = (self as isize + dr) % 4;
         if new_dir < 0 {
-            new_dir = 4 + new_dir;
+            new_dir += 4;
         }
         match new_dir.abs() {
             0 => Direction::North,

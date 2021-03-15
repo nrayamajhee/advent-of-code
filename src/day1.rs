@@ -5,7 +5,7 @@ pub fn get_pairs(numbers: &[usize], sum: usize) -> Option<(usize, usize)> {
     for each in numbers {
         if sum > *each {
             let another = sum - each;
-            if let Ok(_) = numbers.binary_search(&another) {
+            if numbers.binary_search(&another).is_ok() {
                 return Some((*each, another));
             }
         }
@@ -13,21 +13,27 @@ pub fn get_pairs(numbers: &[usize], sum: usize) -> Option<(usize, usize)> {
     None
 }
 
+use std::cmp::Ordering;
+
 pub fn get_pairs_fast(numbers: &[usize], sum: usize) -> Option<(usize, usize)> {
     let mut left = 0;
-    let mut right = if numbers.len() == 0 { 0 } else { numbers.len() - 1};
+    let mut right = if numbers.is_empty() {
+        0
+    } else {
+        numbers.len() - 1
+    };
     let mut pairs = None;
     while left < right {
         let left_num = numbers[left];
         let right_num = numbers[right];
         let current_sum = left_num + right_num;
-        if current_sum == sum {
-            pairs = Some((left_num, right_num));
-            break;
-        } else if current_sum < sum {
-            left += 1;
-        } else {
-            right -= 1;
+        match current_sum.cmp(&sum) {
+            Ordering::Equal => {
+                pairs = Some((left_num, right_num));
+                break;
+            }
+            Ordering::Less => left += 1,
+            Ordering::Greater => right -= 1,
         }
     }
     pairs

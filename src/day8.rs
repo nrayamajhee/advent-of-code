@@ -1,7 +1,6 @@
 use crate::read_lines;
 use anyhow::{Error, Result};
 use std::collections::HashSet;
-use std::convert::TryFrom;
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 enum Instruction {
@@ -12,7 +11,7 @@ enum Instruction {
 
 impl Instruction {
     fn parse(line: &str) -> Result<Self> {
-        let split: Vec<_> = line.split(" ").collect();
+        let split: Vec<_> = line.split(' ').collect();
         let number = split[1].parse()?;
         match split[0] {
             "nop" => Ok(Self::Nop(number)),
@@ -23,7 +22,7 @@ impl Instruction {
     }
 }
 
-fn loop_until_cyclic_or_end(lines: &Vec<Instruction>) -> Result<(bool, isize)> {
+fn loop_until_cyclic_or_end(lines: &[Instruction]) -> Result<(bool, isize)> {
     let mut unique_lines = HashSet::new();
     let mut acc = 0;
     let mut ip = 0;

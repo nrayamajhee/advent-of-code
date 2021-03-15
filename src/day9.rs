@@ -37,19 +37,20 @@ pub fn part2(filename: &str, preamble: usize) -> Result<usize> {
             loop {
                 buffer.pop_front();
                 let new_sum: usize = buffer.iter().sum();
+                if new_sum < invalid_num {
+                    break;
+                }
                 if new_sum == invalid_num {
                     buffer.make_contiguous().sort_unstable();
                     let (first, last) = (
                         buffer
                             .pop_front()
-                            .ok_or(anyhow::Error::msg("Empty Buffer"))?,
+                            .ok_or_else(|| anyhow::Error::msg("Empty Buffer"))?,
                         buffer
                             .pop_back()
-                            .ok_or(anyhow::Error::msg("Empty Buffer"))?,
+                            .ok_or_else(|| anyhow::Error::msg("Empty Buffer"))?,
                     );
                     return Ok(first + last);
-                } else if new_sum < invalid_num {
-                    break;
                 }
             }
         }

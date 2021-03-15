@@ -23,9 +23,9 @@ impl TryFrom<char> for Cell {
     }
 }
 
-impl Into<char> for Cell {
-    fn into(self) -> char {
-        match self {
+impl From<Cell> for char {
+    fn from(value: Cell) -> Self {
+        match value {
             Cell::Floor => '.',
             Cell::Empty => 'L',
             Cell::Occupied => '#',
@@ -104,8 +104,8 @@ impl Grid {
     fn adjacent_neighbours(&self, row: usize, column: usize) -> Result<usize> {
         let mut num_neighbours = 0;
         let (rows, columns) = self.dimensions;
-        for i in -1 as isize..=1 {
-            for j in -1 as isize..=1 {
+        for i in -1..=1 {
+            for j in -1..=1 {
                 if i == 0 && j == 0 {
                     continue;
                 } else {

@@ -4,7 +4,7 @@ use regex::Regex;
 use std::cell::RefCell;
 use std::collections::{HashMap, VecDeque};
 
-const BAG: &'static str = "shiny gold";
+const BAG: &str = "shiny gold";
 
 #[derive(Debug)]
 struct Line {

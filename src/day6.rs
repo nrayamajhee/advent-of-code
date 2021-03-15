@@ -7,7 +7,7 @@ pub fn part1(filename: &str) -> Result<usize> {
     let mut sum = 0;
     for each in read_lines(filename)? {
         let line = each?;
-        if line == "" {
+        if line.is_empty() {
             sum += answers.len();
             answers.clear();
         } else {
@@ -17,7 +17,7 @@ pub fn part1(filename: &str) -> Result<usize> {
         }
     }
     // check again because the input might not have a new line at the end
-    if answers.len() > 0 {
+    if !answers.is_empty() {
         sum += answers.len()
     }
     Ok(sum)
@@ -42,7 +42,7 @@ pub fn part2(filename: &str) -> Result<usize> {
     };
     for each in read_lines(filename)? {
         let line = each?;
-        if line == "" {
+        if line.is_empty() {
             calculate(&mut answers, num_person);
             num_person = 0;
         } else {
@@ -57,7 +57,7 @@ pub fn part2(filename: &str) -> Result<usize> {
         }
     }
     // check again because the input might not have a new line at the end
-    if answers.len() > 0 {
+    if !answers.is_empty() {
         calculate(&mut answers, num_person);
     }
     Ok(sum)

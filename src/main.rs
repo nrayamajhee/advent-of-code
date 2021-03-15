@@ -17,7 +17,8 @@ fn main() -> Result<()> {
             "Day 9: Encoding Error",
             "Day 9: Encoding Error",
             "Day 10: Adapter Array",
-            "Day 11: Seating System"
+            "Day 11: Seating System",
+            "Day 12: Rain Risk"
         );
         print!("Pick you day: ");
         io::stdout().flush()?;
@@ -121,9 +122,18 @@ fn main() -> Result<()> {
             }
             11 => {
                 use aoc::day11::*;
+                println!("{} seats end up occupied", part1("input/day11")?);
+                println!("{} seats end up occupied", part2("input/day11")?);
+            }
+            12 => {
+                use aoc::day12::*;
                 println!(
-                    "{} seats end up occupied",
-                    part1("input/day11")?
+                    "The Manhattan distance between that location and the ship's starting position is {}",
+                    part1("input/day12")?
+                );
+                println!(
+                    "The Manhattan distance between that location and the ship's starting position is {}",
+                    part2("input/day12")?
                 );
             }
             _ => {

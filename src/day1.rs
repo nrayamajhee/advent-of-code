@@ -22,21 +22,19 @@ pub fn get_pairs_fast(numbers: &[usize], sum: usize) -> Option<(usize, usize)> {
     } else {
         numbers.len() - 1
     };
-    let mut pairs = None;
     while left < right {
         let left_num = numbers[left];
         let right_num = numbers[right];
         let current_sum = left_num + right_num;
         match current_sum.cmp(&sum) {
             Ordering::Equal => {
-                pairs = Some((left_num, right_num));
-                break;
+                return Some((left_num, right_num));
             }
             Ordering::Less => left += 1,
             Ordering::Greater => right -= 1,
         }
     }
-    pairs
+    None
 }
 
 pub fn get_triplets(numbers: &[usize], sum: usize) -> Option<(usize, usize, usize)> {
@@ -66,21 +64,13 @@ const SUM: usize = 2020;
 pub fn part1(filename: &str) -> Result<Option<u32>> {
     let mut numbers = read_input(filename)?;
     numbers.sort_unstable();
-    let prod2 = if let Some((a, b)) = get_pairs_fast(&numbers[..], SUM) {
-        Some(a as u32 * b as u32)
-    } else {
-        None
-    };
+    let prod2 = get_pairs_fast(&numbers, SUM).map(|e| e.0 as u32 * e.1 as u32);
     Ok(prod2)
 }
 
 pub fn part2(filename: &str) -> Result<Option<u32>> {
     let mut numbers = read_input(filename)?;
     numbers.sort_unstable();
-    let prod3 = if let Some((a, b, c)) = get_triplets(&numbers[..], SUM) {
-        Some(a as u32 * b as u32 * c as u32)
-    } else {
-        None
-    };
+    let prod3 = get_triplets(&numbers, SUM).map(|e| e.0 as u32 * e.1 as u32 * e.2 as u32);
     Ok(prod3)
 }

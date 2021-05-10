@@ -31,5 +31,6 @@ mod day9 {
 
 test_file! {
     (day4, ("input/day4_test", 2),("input/day4_part2_test", 4)),
-    (day5, ("input/day5_test", 820),("input/day5", 527))
+    (day5, ("input/day5_test", 820),("input/day5", 527)),
+    (day14, ("input/day14_test", 165),("input/day14_test_2", 208))
 }

@@ -31,7 +31,7 @@ pub fn part1(filename: &str) -> Result<usize> {
 }
 
 /// Extended Euclidean Algorithm.
-/// Refer to this video for explanation
+/// Refer to this video for explanation:
 /// <https://www.youtube.com/watch?v=hB34-GSDT3k>.
 ///
 /// For integers a and b this function returns (g, x, y) such that
@@ -47,7 +47,7 @@ fn ext_euclid_algo(a: isize, b: isize) -> (isize, isize, isize) {
 }
 
 /// Uses Chinese Remainder Theorem to return output.
-/// Refer to this video for chinese remainder theorem
+/// Refer to this video for explanation:
 /// <https://www.youtube.com/watch?v=zIFehsBHB8o>
 pub fn part2(filename: &str) -> Result<usize> {
     let numbers: Vec<(isize, isize)> = read_lines(filename)?

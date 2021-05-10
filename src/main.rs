@@ -20,6 +20,7 @@ fn main() -> Result<()> {
             "Day 11: Seating System",
             "Day 12: Rain Risk",
             "Day 13: Shuttle Search",
+            "Day 14: Docking Data",
         );
         print!("Pick you day: ");
         io::stdout().flush()?;
@@ -146,6 +147,17 @@ fn main() -> Result<()> {
                 println!(
                     "The ID of the earliest bus you can take to the airport multiplied by the number of minutes you'll need to wait for that bus is {}",
                     part2("input/day13")?
+                );
+            }
+            14 => {
+                use aoc::day14::*;
+                println!(
+                    "The sum of all values left in memory after it completes is {}",
+                    part1("input/day14")?
+                );
+                println!(
+                    "The sum of all values left in memory after it completes is {}",
+                    part2("input/day14")?
                 );
             }
             _ => {

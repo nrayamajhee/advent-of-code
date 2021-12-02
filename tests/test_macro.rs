@@ -1,11 +1,11 @@
 #[macro_export]
 macro_rules! test_file {
-    ($(($day:ident, ($file1: expr, $ans1: expr), ($file2: expr, $ans2: expr))),+$(,)?) => {
+    ($(($year: ident, $day:ident, ($file1: expr, $ans1: expr), ($file2: expr, $ans2: expr))),+$(,)?) => {
         $(
             #[cfg(test)]
             mod $day {
                 use anyhow::Result;
-                use aoc::$day::*;
+                use aoc::$year::$day::*;
                 #[test]
                 pub fn test_part1() -> Result<()> {
                     assert_eq!($ans1, part1($file1)?);
@@ -23,10 +23,11 @@ macro_rules! test_file {
 
 #[macro_export]
 macro_rules! test {
-    ($(($day:ident, $ans1: expr, $ans2: expr)),+$(,)?) => {
+    ($(($year: ident, $day:ident, $ans1: expr, $ans2: expr)),+$(,)?) => {
         $(
             test_file!{
                 (
+                    $year,
                     $day,
                     (&format!("input/{}_test", stringify!($day)), $ans1),
                     (&format!("input/{}_test", stringify!($day)), $ans2)

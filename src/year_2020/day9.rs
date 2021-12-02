@@ -13,7 +13,7 @@ pub fn part1(filename: &str, preamble: usize) -> Result<usize> {
         if buffer.len() >= preamble {
             let mut temp_buf = buffer.clone();
             temp_buf.make_contiguous().sort_unstable();
-            if crate::day1::get_pairs_fast(temp_buf.as_slices().0, current) == None {
+            if super::day1::get_pairs_fast(temp_buf.as_slices().0, current) == None {
                 num = Some(current);
                 break;
             }

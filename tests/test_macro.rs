@@ -29,8 +29,8 @@ macro_rules! test {
                 (
                     $year,
                     $day,
-                    (&format!("input/{}_test", stringify!($day)), $ans1),
-                    (&format!("input/{}_test", stringify!($day)), $ans2)
+                    (&format!("input/{}/{}_test", stringify!($year), stringify!($day)), $ans1),
+                    (&format!("input/{}/{}_test", stringify!($year), stringify!($day)), $ans2)
                 )
              }
         )*

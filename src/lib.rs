@@ -23,7 +23,7 @@ macro_rules! use_mod {
 #[macro_export]
 macro_rules! print_line {
     ($($line:expr),+$(,)?) => {
-        let mut string = String::new();
+        let mut string = String::from("\n");
         $(
             string.push_str(&$line);
             string.push('\n');
@@ -33,4 +33,5 @@ macro_rules! print_line {
 }
 
 pub mod year_2020;
+pub mod year_2021;
 
